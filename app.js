@@ -1,9 +1,13 @@
 var express  = require("express"),
     mongoose = require("mongoose"),
     seedDB   = require("./seeds.js"),
+    passport = require("passport"),
+    flash    = require("connect-flash"),
+    bodyParser = require("body-parser"),
     app      = express();
 
 var indexRoutes = require("./routes/index.js");
+require("./config/passport.js");
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -12,6 +16,9 @@ app.use(require("express-session")({
     resave: false,
     saveUninitialized: false
 }));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useUnifiedTopology", true);

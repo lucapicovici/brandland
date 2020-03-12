@@ -1,6 +1,7 @@
 var express        = require("express"),
     Product        = require("../models/product.js"),
-    router         = express.Router();
+    router         = express.Router(),
+    passport       = require("passport"),
     csrf           = require("csurf"),
     csrfProtection = csrf();
 
@@ -16,12 +17,18 @@ router.get("/", function(req, res){
     });
 });
 
-router.get("/register", function(req, res){
-    res.render("register", {csrfToken: req.csrfToken()});
+router.get("/user/register", function(req, res){
+    res.render("user/register", {csrfToken: req.csrfToken()});
 });
 
-router.post("/register", function(req, res){
-    res.redirect("/");
+router.post("/user/register", passport.authenticate({
+    successRedirect: "/user/profile",
+    failureRedirect: "/user/register",
+    failureFlash: true
+}));
+
+router.get("/user/profile", function(req, res){
+    res.render("user/profile");
 });
 
 module.exports = router;
