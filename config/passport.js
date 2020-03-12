@@ -27,14 +27,14 @@ passport.use("local.signup", new localStrategy({
         }
         // Return (flash) message if the user already exists, 
         // so you don't overwrite or create a new one with same email
-        if (user) {
+        if (foundUser) {
             return done(null, false, {message: "Email is already in use."});
         }
         // Create new user
-        var newUser = new User({
-            email: email,
-            password: User.encryptPassword(password)
-        });
+        var newUser = new User();
+        newUser.email = email;
+        newUser.password = newUser.encryptPassword(password);
+
         newUser.save(function(err, user){
             if (err) {
                 return done(err);
