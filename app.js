@@ -1,10 +1,17 @@
-var express = require("express"),
-    app     = express();
+var express  = require("express"),
+    mongoose = require("mongoose"),
+    seedDB   = require("./seeds.js"),
+    app      = express();
 
 var indexRoutes = require("./routes/index.js");
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+
+mongoose.set("useNewUrlParser", true);
+mongoose.set("useUnifiedTopology", true);
+mongoose.connect("mongodb://localhost/shopping-cart");
+seedDB();
 
 app.use("/", indexRoutes);
 

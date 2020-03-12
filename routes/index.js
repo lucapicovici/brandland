@@ -1,8 +1,15 @@
 var express = require("express"),
+    Product = require("../models/product.js"),
     router  = express.Router();
 
 router.get("/", function(req, res){
-    res.render("index");
+    Product.find({}, function(err, foundProducts){
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("index", {products: foundProducts});
+        }
+    });
 });
 
 module.exports = router;
