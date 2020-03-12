@@ -7,6 +7,11 @@ var indexRoutes = require("./routes/index.js");
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+app.use(require("express-session")({
+    secret: "This app functionality is really cool so far",
+    resave: false,
+    saveUninitialized: false
+}));
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useUnifiedTopology", true);
