@@ -14,7 +14,8 @@ router.get("/", function(req, res){
 });
 
 router.get("/user/register", function(req, res){
-    res.render("user/register");
+    console.log(req.session);
+    res.render("user/register", {session: req.session});
 });
 
 router.post("/user/register", passport.authenticate("local.signup", {
