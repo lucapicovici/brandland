@@ -16,10 +16,10 @@ app.use(require("express-session")({
     resave: false,
     saveUninitialized: false
 }));
-app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(flash());
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useUnifiedTopology", true);

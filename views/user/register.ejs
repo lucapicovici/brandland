@@ -3,22 +3,12 @@
 <h1>Sign Up</h1>
 
 <!-- If there are errors -->
-<% var errMessages = 0; %>
-<% var sessionObjectKeys = Object.keys(session); %>
-
-<% for (var i = 0; i < sessionObjectKeys.length; i++) { %>
-    <% if (sessionObjectKeys[i] == "flash") { %>
-        <% errMessages = session.flash.error; %>
-        <% break; %>
-    <% } %>
-<% } %>
-
-<% if (errMessages) { %>
-    <% if (errMessages.length > 0) { %>
-        <div class="alert alert-danger" role="alert">
-            <p><%= errMessages[0] %></p>
-        </div> 
-    <% } %> 
+<% if (errMessages.length > 0) { %>
+    <div class="alert alert-danger" role="alert">
+        <% errMessages.forEach(function(message){ %>
+            <p><%= message %></p>
+        <% }) %>
+    </div> 
 <% } %>
 
 <form action="/user/register" method="POST">
