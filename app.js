@@ -1,10 +1,11 @@
-var express  = require("express"),
-    mongoose = require("mongoose"),
-    seedDB   = require("./seeds.js"),
-    passport = require("passport"),
-    flash    = require("connect-flash"),
+var express    = require("express"),
+    mongoose   = require("mongoose"),
+    seedDB     = require("./seeds.js"),
+    passport   = require("passport"),
+    flash      = require("connect-flash"),
     bodyParser = require("body-parser"),
-    app      = express();
+    validator  = require("express-validator"),
+    app        = express();
 
 var indexRoutes = require("./routes/index.js");
 require("./config/passport.js");
@@ -19,6 +20,7 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(validator()); // After bodyParser
 app.use(flash());
 
 mongoose.set("useNewUrlParser", true);
