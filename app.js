@@ -7,7 +7,8 @@ var express    = require("express"),
     validator  = require("express-validator"),
     app        = express();
 
-var indexRoutes = require("./routes/index.js");
+var indexRoutes = require("./routes/index.js"),
+    userRoutes  = require("./routes/user.js");
 require("./config/passport.js");
 
 app.set("view engine", "ejs");
@@ -28,6 +29,12 @@ mongoose.set("useUnifiedTopology", true);
 mongoose.connect("mongodb://localhost/shopping-cart");
 seedDB();
 
+app.use(function(req, res, next){
+    res.locals.login = req.isAuthenticated();
+    next();
+});
+
+app.use("/user", userRoutes);
 app.use("/", indexRoutes);
 
 app.listen(3000, () => {
