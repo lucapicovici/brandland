@@ -1,5 +1,6 @@
 var express        = require("express"),
     Product        = require("../models/product.js"),
+    Cart           = require("../models/cart.js"),
     router         = express.Router(),
     passport       = require("passport");
 
@@ -10,6 +11,21 @@ router.get("/", function(req, res){
         } else {
             res.render("index", {products: foundProducts});
         }
+    });
+});
+
+router.get("/add-to-cart/:id", function(req, res){
+    var productId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {items: {}});
+
+    Product.findById(productId, function(err, product){
+        if (err) {
+            return res.redirect("/");
+        }
+        cart.add(product, product.id);
+        req.session.cart = cart;
+        console.log(req.session.cart);
+        res.redirect("/");
     });
 });
 

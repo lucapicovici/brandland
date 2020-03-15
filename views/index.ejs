@@ -10,7 +10,7 @@
                       <h5 class="card-title"><%= product.title %></h5>
                       <p class="card-text"><%= product.description %></p>
                       <p class="price float-left">$<%= product.price %></p>
-                      <a href="#" class="btn btn-success btn-sm float-right">Add to Shopping Cart</a>
+                      <a href="/add-to-cart/<%= product._id %>" class="btn btn-success btn-sm float-right">Add to Shopping Cart</a>
                     </div>
                   </div>
             </div>
