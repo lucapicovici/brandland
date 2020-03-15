@@ -1,11 +1,14 @@
-var express    = require("express"),
-    mongoose   = require("mongoose"),
-    seedDB     = require("./seeds.js"),
-    passport   = require("passport"),
-    flash      = require("connect-flash"),
-    bodyParser = require("body-parser"),
-    validator  = require("express-validator"),
-    app        = express();
+var express      = require("express"),
+    mongoose     = require("mongoose"),
+    seedDB       = require("./seeds.js"),
+    passport     = require("passport"),
+    flash        = require("connect-flash"),
+    bodyParser   = require("body-parser"),
+    validator    = require("express-validator"),
+    cookieParser = require("cookie-parser"),
+    session      = require("express-session"),
+    mongoStore   = require("connect-mongo")(session),
+    app          = express();
 
 var indexRoutes = require("./routes/index.js"),
     userRoutes  = require("./routes/user.js");
@@ -13,10 +16,12 @@ require("./config/passport.js");
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-app.use(require("express-session")({
+app.use(session({
     secret: "This app functionality is really cool so far",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new mongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { maxAge: 180 * 60 * 1000 }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -31,6 +36,7 @@ seedDB();
 
 app.use(function(req, res, next){
     res.locals.login = req.isAuthenticated();
+    req.locals.session = req.session;
     next();
 });
 
