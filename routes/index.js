@@ -12,6 +12,7 @@ router.get("/", function(req, res){
             res.render("index", {products: foundProducts});
         }
     });
+    console.log(req.session);
 });
 
 router.get("/add-to-cart/:id", function(req, res){
@@ -24,7 +25,7 @@ router.get("/add-to-cart/:id", function(req, res){
         }
         cart.add(product, product.id);
         req.session.cart = cart;
-        console.log(req.session.cart);
+        console.log(req.session);
         res.redirect("/");
     });
 });

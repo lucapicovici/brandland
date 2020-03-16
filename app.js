@@ -7,6 +7,7 @@ var express      = require("express"),
     validator    = require("express-validator"),
     session      = require("express-session"),
     mongoStore   = require("connect-mongo")(session),
+    Cart         = require("./models/cart.js"),
     app          = express();
 
 var indexRoutes = require("./routes/index.js"),
@@ -36,6 +37,7 @@ app.use(flash());
 app.use(function(req, res, next){
     res.locals.login = req.isAuthenticated();
     res.locals.session = req.session;
+    req.session.cart = new Cart(req.session.cart ? req.session.cart : {items: {}});
     next();
 });
 
