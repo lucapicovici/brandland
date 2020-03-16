@@ -10,7 +10,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Brand</a>
+            <a class="navbar-brand" href="/">Brand</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -19,7 +19,7 @@
               <ul class="navbar-nav ml-auto">
                 <% if (login) { %>
                   <li class="nav-item active">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/shopping-cart">
                       <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                       Shopping Cart
                       <span class="badge badge-success"><%= session.cart.totalQty %></span>
