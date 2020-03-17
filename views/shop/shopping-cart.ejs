@@ -15,8 +15,8 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Reduce by 1</a></li>
-                                    <li><a class="dropdown-item" href="#">Remove All</a></li>
+                                    <li><a class="dropdown-item" href="/reduce/<%= product.item._id %>">Reduce by 1</a></li>
+                                    <li><a class="dropdown-item" href="/remove/<%= product.item._id %>">Remove All</a></li>
                                 </ul>
                             </div>
                             <span class="badge badge-info badge-pill float-right"><%= product.qty %></span>

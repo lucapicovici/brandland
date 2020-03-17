@@ -2,10 +2,23 @@ var express  = require("express"),
     router   = express.Router(),
     passport = require("passport");
 
+var Order    = require("../models/order.js"),
+    Cart     = require("../models/cart.js");
+
 // User profile - must be put before notLoggedIn middleware
 router.get("/profile", isLoggedIn, function(req, res){
     console.log(req.session);
-    res.render("user/profile");
+    Order.find({user: req.user}, function(err, orders){
+        if (err) {
+            return res.write("Error!");
+        }
+        var cart;
+        orders.forEach(function(order){
+            cart = new Cart(order.cart);
+            order.items = cart.generateArray();
+        });
+        res.render("user/profile", {orders: orders});
+    });
 });
 
 // Logout

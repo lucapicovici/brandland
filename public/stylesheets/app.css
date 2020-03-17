@@ -2,3 +2,8 @@
     max-height: 200px;
     box-sizing: content-box;
 }
+
+#totalPrice {
+    padding-top: 10px;
+    padding-left: 20px;
+}

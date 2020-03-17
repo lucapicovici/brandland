@@ -1,5 +1,28 @@
 <%- include("../partials/header.ejs"); %>
 
-<h1>Profile Page</h1>
+<div class="container">
+    <h1>User Profile</h1>
+    <hr>
+    <h2>My Orders</h2>
+    <% orders.forEach(function(order){ %>
+        <div class="card mb-5">
+            <div class="card-header">
+                Order <%= order._id %>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <% order.items.forEach(function(itemObject){ %>
+                        <li class="list-group-item">
+                            <%= itemObject.item.title %>
+                            <span class="badge badge-pill badge-info">x<%= itemObject.qty %></span>
+                            <span class="badge badge-success badge-pill">$<%= itemObject.price %></span>
+                        </li>
+                    <% }); %>
+                    <p class="card-text" id="totalPrice"><strong>Total: $<%= order.cart.totalPrice %></strong></p>
+                </ul>
+            </div>
+        </div>
+    <% }); %>
+</div>
 
 <%- include("../partials/footer.ejs"); %>

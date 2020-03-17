@@ -24,11 +24,29 @@ router.get("/add-to-cart/:id", function(req, res){
         if (err) {
             return res.redirect("/");
         }
-        cart.add(product, product.id);
+        cart.add(product, product.id); // product._id ?
         req.session.cart = cart;
         console.log(req.session);
         res.redirect("/");
     });
+});
+
+router.get("/reduce/:id", function(req, res){
+    var productId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {items: {}});
+
+    cart.reduceByOne(productId);
+    req.session.cart = cart;
+    res.redirect("/shopping-cart");
+});
+
+router.get("/remove/:id", function(req, res){
+    var productId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {items: {}});
+
+    cart.removeItem(productId);
+    req.session.cart = cart;
+    res.redirect("/shopping-cart");
 });
 
 router.get("/shopping-cart", function(req, res){
