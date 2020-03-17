@@ -39,7 +39,7 @@ router.get("/shopping-cart", function(req, res){
     return res.render("shop/shopping-cart", {products: cart.generateArray(), totalPrice: cart.totalPrice});
 });
 
-router.post("/checkout", isLoggedIn, function(req, res){
+router.post("/shopping-cart", isLoggedIn, function(req, res){
     if (req.session.cart.totalQty == 0) {
         return res.redirect("/shopping-cart");
     }
@@ -55,13 +55,13 @@ router.post("/checkout", isLoggedIn, function(req, res){
         req.session.cart = null;
         res.redirect("/");
     });
-
 });
 
 function isLoggedIn(req, res, next){
     if (req.isAuthenticated()) {
         return next();
     }
+    req.session.oldUrl = req.url;
     res.redirect("/user/login");
 };
 

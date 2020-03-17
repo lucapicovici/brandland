@@ -28,10 +28,17 @@ router.get("/register", function(req, res){
 });
 
 router.post("/register", passport.authenticate("local.signup", {
-    successRedirect: "/user/profile",
     failureRedirect: "/user/register",
     failureFlash: true
-}));
+}), function(req, res){
+    if (req.session.oldUrl) {
+        var oldUrl = req.session.oldUrl;
+        req.session.oldUrl = null;
+        res.redirect(oldUrl);
+    } else {
+        res.redirect("/user/profile");
+    }
+});
 
 // Login
 router.get("/login", function(req, res){
@@ -42,10 +49,17 @@ router.get("/login", function(req, res){
 });
 
 router.post("/login", passport.authenticate("local.signin", {
-    successRedirect: "/user/profile",
     failureRedirect: "/user/login",
     failureFlash: true
-}));
+}), function(req, res){
+    if (req.session.oldUrl) {
+        var oldUrl = req.session.oldUrl;
+        req.session.oldUrl = null;
+        res.redirect(oldUrl);
+    } else {
+        res.redirect("/user/profile");
+    }
+});
 
 function isLoggedIn(req, res, next){
     if (req.isAuthenticated()) {

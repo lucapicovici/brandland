@@ -38,6 +38,7 @@ app.use(function(req, res, next){
     res.locals.login = req.isAuthenticated();
     res.locals.session = req.session;
     req.session.cart = new Cart(req.session.cart ? req.session.cart : {items: {}});
+    res.locals.user = req.user;
     next();
 });
 
