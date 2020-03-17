@@ -1,6 +1,13 @@
 <%- include("./partials/header.ejs"); %>
 
 <div class="container">
+    <% if (successMessages.length > 0) { %>
+        <div class="alert alert-success" role="alert">
+            <% successMessages.forEach(function(message){ %>
+                <p><%= message %></p>
+            <% }) %>
+        </div> 
+    <% } %>
     <div class="row">
         <% products.forEach(function(product){ %>
             <div class="col-md-4">
