@@ -39,6 +39,8 @@ app.use(function(req, res, next){
     res.locals.session = req.session;
     req.session.cart = new Cart(req.session.cart ? req.session.cart : {items: {}});
     res.locals.user = req.user;
+    res.locals.errorMessages = req.flash("error");
+    res.locals.successMessages = req.flash("success");
     next();
 });
 

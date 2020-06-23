@@ -6,15 +6,21 @@ var express        = require("express"),
     passport       = require("passport");
 
 router.get("/", function(req, res){
-    Product.find({}, function(err, foundProducts){
+    res.render("index");
+});
+
+router.get("/laptop", function(req, res){
+    Product.find({}, function(err, products){
         if (err) {
             console.log(err);
         } else {
-            res.render("index", {products: foundProducts, successMessages: req.flash("success")});
+            res.render("products/laptop/index", {products: products});
         }
     });
     console.log(req.session);
 });
+
+// Shopping Cart
 
 router.get("/add-to-cart/:id", function(req, res){
     var productId = req.params.id;
