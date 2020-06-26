@@ -1,21 +1,27 @@
 <%- include("../../partials/header.ejs"); %>
 
 <div class="container">
-    <div class="row">
-        <% products.forEach(function(product){ %>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="<%= product.imagePath %>" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title"><%= product.title %></h5>
-                      <p class="card-text"><%= product.description %></p>
-                      <p class="price float-left">$<%= product.price %></p>
-                      <a href="/add-to-cart/<%= product._id %>" class="btn btn-success btn-sm float-right">Add to Shopping Cart</a>
-                    </div>
-                  </div>
+  <div class="row">
+    <% laptops.forEach(function(laptop){ %>
+      <div class="col-md-6 col-lg-4">
+        <div class="card">
+          <a href="/laptop/<%= laptop._id %>">
+            <div class="card-img-wrapper">
+              <img src="<%= laptop.image %>" class="card-img-top">
             </div>
-        <% }); %>
-    </div>
+          </a>
+          <div class="card-body">
+            <a href="/laptop/<%= laptop._id %>">
+              <h5 class="card-title"><%= laptop.brand + " " + laptop.name %></h5>
+            </a>
+            <p class="card-text"><%= laptop.screenSize %></p>
+            <p class="price float-left">$<%= laptop.price %></p>
+            <a href="/add-to-cart/laptop/<%= laptop._id %>" class="btn btn-success btn-sm float-right">Add to Shopping Cart</a>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
 </div>
 
 <%- include("../../partials/footer.ejs"); %>

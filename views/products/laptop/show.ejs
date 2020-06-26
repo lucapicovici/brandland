@@ -1,0 +1,120 @@
+<%- include("../../partials/header.ejs"); %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="show-image-wrapper">
+        <img src="<%= laptop.image %>">
+      </div>
+    </div>
+    <div class="col-md-6 d-flex">
+      <div class="show-button">
+        <a href="/add-to-cart/laptop/<%= laptop._id %>" class="btn btn-success btn-sm float-right">Add to Shopping Cart</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="show-table">
+        <tbody>
+          <tr>
+            <td class="table-colspan" colspan="2">Laptop</td>
+          </tr>
+          <tr>
+            <td class="table-left">Brand</td>
+            <td><%= laptop.brand %></td>
+          </tr>
+          <tr>
+            <td class="table-left">Name</td>
+            <td><%= laptop.name %></td>
+          </tr>
+          <tr>
+            <td class="table-left">ID</td>
+            <td><%= laptop.id %></td>
+          </tr>
+          <tr>
+            <td class="table-colspan" colspan="2">Display</td>
+          </tr>
+          <tr>
+            <td>Screen size</td>
+            <td><%= laptop.displaySize %> in</td>
+          </tr>
+          <tr>
+            <td>Resolution</td>
+            <td><%= laptop.displayResolution %></td>
+          </tr>
+          <tr>
+            <td class="table-colspan" colspan="2">Processor</td>
+          </tr>
+          <tr>
+            <td>Brand</td>
+            <td><%= laptop.cpuBrand %></td>
+          </tr>
+          <tr>
+            <td>Model</td>
+            <td><%= laptop.cpuModel %></td>
+          </tr>
+          <tr>
+            <td>Frequency</td>
+            <td><%= laptop.cpuFrequency %> GHz</td>
+          </tr>
+          <tr>
+            <td>Cores</td>
+            <td><%= laptop.cpuCores %></td>
+          </tr>
+          <tr>
+            <td>Threads</td>
+            <td><%= laptop.cpuThreads %></td>
+          </tr>
+          <tr>
+            <td class="table-colspan" colspan="2">Memory</td>
+          </tr>
+          <tr>
+            <td>Type</td>
+            <td><%= laptop.memoryType %></td>
+          </tr>
+          <tr>
+            <td>Size</td>
+            <td><%= laptop.memorySize %> GB</td>
+          </tr>
+          <tr>
+            <td>Frequency</td>
+            <td><%= laptop.memoryFrequency %> MHz</td>
+          </tr>
+          <tr>
+            <td class="table-colspan" colspan="2">Video Card</td>
+          </tr>
+          <tr>
+            <td>Brand</td>
+            <td><%= laptop.gpuBrand %></td>
+          </tr>
+          <tr>
+            <td>Model</td>
+            <td><%= laptop.gpuModel %></td>
+          </tr>
+          <tr>
+            <td>Type</td>
+            <td><%= laptop.gpuType %></td>
+          </tr>
+          <tr>
+            <td>Memory Type</td>
+            <td><%= laptop.gpuMemoryType %></td>
+          </tr>
+          <tr>
+            <td>Memory Size</td>
+            <td><%= laptop.gpuMemorySize %> GB</td>
+          </tr>
+          <tr>
+            <td class="table-colspan" colspan="2">Storage</td>
+          </tr>
+          <tr>
+            <td>Storage</td>
+            <td><%= laptop.storage %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include("../../partials/footer.ejs"); %>

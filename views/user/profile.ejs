@@ -13,7 +13,7 @@
                 <ul class="list-group list-group-flush">
                     <% order.items.forEach(function(itemObject){ %>
                         <li class="list-group-item">
-                            <%= itemObject.item.title %>
+                            <%= itemObject.item.brand + " " + itemObject.item.name %>
                             <span class="badge badge-pill badge-info">x<%= itemObject.qty %></span>
                             <span class="badge badge-success badge-pill">$<%= itemObject.price %></span>
                         </li>

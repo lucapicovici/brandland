@@ -1,40 +1,141 @@
-var express        = require("express"),
-    Product        = require("../models/product.js"),
-    Cart           = require("../models/cart.js"),
-    Order          = require("../models/order.js"),
-    router         = express.Router(),
-    passport       = require("passport");
+var express  = require("express"),
+    router   = express.Router(),
+    passport = require("passport");
+
+var Cart            = require("../models/cart.js"),
+    Order           = require("../models/order.js"),
+    Laptop          = require("../models/laptop.js"),
+    Laptop_Backpack = require("../models/laptop-backpack.js"),
+    Laptop_Ram      = require("../models/laptop-ram.js");
 
 router.get("/", function(req, res){
     res.render("index");
 });
 
 router.get("/laptop", function(req, res){
-    Product.find({}, function(err, products){
+    Laptop.find({}, function(err, laptops){
         if (err) {
             console.log(err);
         } else {
-            res.render("products/laptop/index", {products: products});
+            res.render("products/laptop/index", {laptops: laptops});
         }
     });
-    console.log(req.session);
+});
+
+router.get("/laptop/:id", function(req, res){
+    // Check if valid object id
+    Laptop.findById(req.params.id, function(err, laptop){
+        if (err || !laptop) {
+            console.log(err);
+            req.flash("error", "Product not found.");
+            res.redirect("back");
+        } else {
+            res.render("products/laptop/show", {laptop: laptop});
+        }
+    });
+});
+
+router.get("/laptop-backpack", function(req, res){
+    Laptop_Backpack.find({}, function(err, laptop_backpacks){
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("products/laptop-backpack/index", {laptop_backpacks: laptop_backpacks});
+        }
+    });
+});
+
+router.get("/laptop-backpack/:id", function(req, res){
+    // Check if valid object id
+    Laptop_Backpack.findById(req.params.id, function(err, laptop_backpack){
+        if (err || !laptop_backpack) {
+            console.log(err);
+            req.flash("error", "Product not found.");
+            res.redirect("back");
+        } else {
+            res.render("products/laptop-backpack/show", {laptop_backpack: laptop_backpack});
+        }
+    });
+});
+
+router.get("/laptop-ram", function(req, res){
+    Laptop_Ram.find({}, function(err, laptop_ram){
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("products/laptop-ram/index", {laptop_ram: laptop_ram});
+        }
+    });
+});
+
+router.get("/laptop-ram/:id", function(req, res){
+    // Check if valid object id
+    Laptop_Ram.findById(req.params.id, function(err, laptop_ram){
+        if (err || !laptop_ram) {
+            console.log(err);
+            req.flash("error", "Product not found.");
+            res.redirect("back");
+        } else {
+            res.render("products/laptop-ram/show", {laptop_ram: laptop_ram});
+        }
+    });
 });
 
 // Shopping Cart
 
-router.get("/add-to-cart/:id", function(req, res){
+router.get("/add-to-cart/:type/:id", function(req, res){
+    var type = req.params.type;
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {items: {}});
 
-    Product.findById(productId, function(err, product){
-        if (err) {
-            return res.redirect("/");
-        }
-        cart.add(product, product.id); // product._id ?
-        req.session.cart = cart;
-        console.log(req.session);
-        res.redirect("/");
-    });
+    switch(type) {
+        case 'laptop':
+            Laptop.findById(productId, function(err, laptop){
+                if (err || !laptop) {
+                    console.log(err);
+                    req.flash("error", "Product not found.");
+                    res.redirect("back");
+                } else {
+                    cart.add(laptop, laptop._id);
+                    req.session.cart = cart;
+                    console.log(req.session);
+                    res.redirect("back");
+                }
+            });
+            break;
+        case 'laptop-backpack':
+            Laptop_Backpack.findById(productId, function(err, laptop_backpack){
+                if (err || !laptop_backpack) {
+                    console.log(err);
+                    req.flash("error", "Product not found.");
+                    res.redirect("back");
+                } else {
+                    cart.add(laptop_backpack, laptop_backpack._id);
+                    req.session.cart = cart;
+                    console.log(req.session);
+                    res.redirect("back");
+                }
+            });
+            break;
+        case 'laptop-ram':
+            Laptop_Ram.findById(productId, function(err, laptop_ram){
+                if (err || !laptop_ram) {
+                    console.log(err);
+                    req.flash("error", "Product not found.");
+                    res.redirect("back");
+                } else {
+                    cart.add(laptop_ram, laptop_ram._id);
+                    req.session.cart = cart;
+                    console.log(req.session);
+                    res.redirect("back");
+                }
+            });
+            break;
+        default:
+            console.log("DEFAULT: Product not found");
+            req.flash("Product not found.");
+            return res.redirect("back");
+    }
 });
 
 router.get("/reduce/:id", function(req, res){
@@ -77,7 +178,7 @@ router.post("/shopping-cart", isLoggedIn, function(req, res){
         // After successful checkout
         req.flash("success", "Order has been placed successfully.");
         req.session.cart = null;
-        res.redirect("/");
+        res.redirect("back");
     });
 });
 

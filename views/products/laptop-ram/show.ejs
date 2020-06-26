@@ -1,0 +1,68 @@
+<%- include("../../partials/header.ejs"); %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="show-image-wrapper">
+        <img src="<%= laptop_ram.image %>">
+      </div>
+    </div>
+    <div class="col-md-6 d-flex">
+      <div class="show-button">
+        <a href="/add-to-cart/laptop-ram/<%= laptop_ram._id %>" class="btn btn-success btn-sm float-right">Add to Shopping Cart</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="show-table">
+        <tbody>
+          <tr>
+            <td class="table-colspan" colspan="2">Memory</td>
+          </tr>
+          <tr>
+            <td class="table-left">Brand</td>
+            <td><%= laptop_ram.brand %></td>
+          </tr>
+          <tr>
+            <td class="table-left">Name</td>
+            <td><%= laptop_ram.name %></td>
+          </tr>
+          <tr>
+            <td class="table-left">ID</td>
+            <td><%= laptop_ram.id %></td>
+          </tr>
+          <tr>
+            <td class="table-colspan" colspan="2">General</td>
+          </tr>
+          <tr>
+            <td>Memory Type</td>
+            <td><%= laptop_ram.memoryType %></td>
+          </tr>
+          <tr>
+            <td>Memory Size</td>
+            <td><%= laptop_ram.memorySize %> GB</td>
+          </tr>
+          <tr>
+            <td>Memory Frequency</td>
+            <td><%= laptop_ram.memoryFrequency %> MHz</td>
+          </tr>
+          <tr>
+            <td>CAS Latency</td>
+            <td><%= laptop_ram.casLatency %> ns</td>
+          </tr>
+          <tr>
+            <td>Standard</td>
+            <td><%= laptop_ram.standard %></td>
+          </tr>
+          <tr>
+            <td>Voltage</td>
+            <td><%= laptop_ram.voltage %>V</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include("../../partials/footer.ejs"); %>

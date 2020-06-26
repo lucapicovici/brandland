@@ -1,0 +1,27 @@
+<%- include("../../partials/header.ejs"); %>
+
+<div class="container">
+  <div class="row">
+    <% laptop_ram.forEach(function(laptop_ram){ %>
+      <div class="col-md-6 col-lg-4">
+        <div class="card">
+          <a href="/laptop-ram/<%= laptop_ram._id %>">
+            <div class="card-img-wrapper">
+              <img src="<%= laptop_ram.image %>" class="card-img-top">
+            </div>
+          </a>
+          <div class="card-body">
+            <a href="/laptop-ram/<%= laptop_ram._id %>">
+              <h5 class="card-title"><%= laptop_ram.brand + " " + laptop_ram.name %></h5>
+            </a>
+            <p class="card-text"><%= laptop_ram.memoryType %></p>
+            <p class="price float-left">$<%= laptop_ram.price %></p>
+            <a href="/add-to-cart/laptop-ram/<%= laptop_ram._id %>" class="btn btn-success btn-sm float-right">Add to Shopping Cart</a>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>
+
+<%- include("../../partials/footer.ejs"); %>

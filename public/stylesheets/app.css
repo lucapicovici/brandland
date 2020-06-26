@@ -1,9 +1,56 @@
-.card img {
-    max-height: 200px;
-    box-sizing: content-box;
+body {
+    font-family: 'Nanum Gothic';
 }
 
 #totalPrice {
     padding-top: 10px;
     padding-left: 20px;
 }
+
+.card-img-wrapper {
+    height: 200px;
+    display: flex;
+}
+
+.card-img-wrapper img {
+    object-fit: contain;
+}
+
+.show-table {
+    width: 75%;
+    word-break: break-all;
+    margin-bottom: 100px;
+}
+
+.show-table td{
+    border-bottom: 1px solid #ddd;
+    padding: 6px;
+}
+
+.show-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.table-colspan {
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #e8f7ff;
+}
+
+.show-image-wrapper {
+    height: 300px;
+    display: flex;
+}
+
+.show-image-wrapper img {
+    max-width: 300px;
+    object-fit: contain;
+}
+
+.show-button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+

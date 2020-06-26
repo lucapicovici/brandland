@@ -1,0 +1,60 @@
+<%- include("../../partials/header.ejs"); %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="show-image-wrapper">
+        <img src="<%= laptop_backpack.image %>">
+      </div>
+    </div>
+    <div class="col-md-6 d-flex">
+      <div class="show-button">
+        <a href="/add-to-cart/laptop-backpack/<%= laptop_backpack._id %>" class="btn btn-success btn-sm float-right">Add to Shopping Cart</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="show-table">
+        <tbody>
+          <tr>
+            <td class="table-colspan" colspan="2">Backpack</td>
+          </tr>
+          <tr>
+            <td class="table-left">Brand</td>
+            <td><%= laptop_backpack.brand %></td>
+          </tr>
+          <tr>
+            <td class="table-left">Name</td>
+            <td><%= laptop_backpack.name %></td>
+          </tr>
+          <tr>
+            <td class="table-left">ID</td>
+            <td><%= laptop_backpack.id %></td>
+          </tr>
+          <tr>
+            <td class="table-colspan" colspan="2">General</td>
+          </tr>
+          <tr>
+            <td>Max laptop display size</td>
+            <td><%= laptop_backpack.maxLaptopDisplaySize %> in</td>
+          </tr>
+          <tr>
+            <td>Dimensions</td>
+            <td><%= laptop_backpack.dimensions %></td>
+          </tr>
+          <tr>
+            <td>Colour</td>
+            <td><%= laptop_backpack.colour %></td>
+          </tr>
+          <tr>
+            <td>Weight</td>
+            <td><%= laptop_backpack.weight %> kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include("../../partials/footer.ejs"); %>
