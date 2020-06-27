@@ -8,7 +8,7 @@
                     <% products.forEach(function(product){ %>
                         <li class="list-group-item">
                             <strong>
-                                <a href="/laptop/<%= product.item._id %>">
+                                <a href="/<%= product.itemType %>/<%= product.item._id %>">
                                     <%= product.item.brand + " " + product.item.name %>
                                 </a>
                             </strong>

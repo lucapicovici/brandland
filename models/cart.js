@@ -3,10 +3,10 @@ module.exports = function Cart(oldCart) {
     this.totalQty = oldCart.totalQty || 0;
     this.totalPrice = oldCart.totalPrice || 0;
 
-    this.add = function(item, id) {
+    this.add = function(itemType, item, id) {
         var storedItem = this.items[id];
         if (!storedItem) {
-            storedItem = this.items[id] = {item: item, qty: 0, price: 0};
+            storedItem = this.items[id] = {itemType: itemType, item: item, qty: 0, price: 0};
         }
         storedItem.qty++;
         storedItem.price = storedItem.item.price * storedItem.qty; // Store the aggregate price for a single item

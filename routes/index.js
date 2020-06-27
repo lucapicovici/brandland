@@ -96,7 +96,7 @@ router.get("/add-to-cart/:type/:id", function(req, res){
                     req.flash("error", "Product not found.");
                     res.redirect("back");
                 } else {
-                    cart.add(laptop, laptop._id);
+                    cart.add("laptop", laptop, laptop._id);
                     req.session.cart = cart;
                     console.log(req.session);
                     res.redirect("back");
@@ -110,7 +110,7 @@ router.get("/add-to-cart/:type/:id", function(req, res){
                     req.flash("error", "Product not found.");
                     res.redirect("back");
                 } else {
-                    cart.add(laptop_backpack, laptop_backpack._id);
+                    cart.add("laptop-backpack", laptop_backpack, laptop_backpack._id);
                     req.session.cart = cart;
                     console.log(req.session);
                     res.redirect("back");
@@ -124,7 +124,7 @@ router.get("/add-to-cart/:type/:id", function(req, res){
                     req.flash("error", "Product not found.");
                     res.redirect("back");
                 } else {
-                    cart.add(laptop_ram, laptop_ram._id);
+                    cart.add("laptop-ram", laptop_ram, laptop_ram._id);
                     req.session.cart = cart;
                     console.log(req.session);
                     res.redirect("back");
