@@ -53,4 +53,8 @@ body {
     align-items: center;
 }
 
-
+#checkout-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}

@@ -182,6 +182,14 @@ router.post("/shopping-cart", isLoggedIn, function(req, res){
     });
 });
 
+router.get("/checkout", function(req, res){
+    if (req.session.cart.totalQty == 0) {
+        return res.redirect("/shopping-cart");
+    }
+    var cart = new Cart(req.session.cart);
+    res.render("shop/checkout", {totalPrice: cart.totalPrice});
+});
+
 function isLoggedIn(req, res, next){
     if (req.isAuthenticated()) {
         return next();
