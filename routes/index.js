@@ -182,7 +182,7 @@ router.post("/shopping-cart", isLoggedIn, function(req, res){
     });
 });
 
-router.get("/checkout", function(req, res){
+router.get("/checkout", isLoggedIn, function(req, res){
     if (req.session.cart.totalQty == 0) {
         return res.redirect("/shopping-cart");
     }
@@ -190,7 +190,7 @@ router.get("/checkout", function(req, res){
     res.render("shop/checkout", {totalPrice: cart.totalPrice, errMsg: req.flash("error")});
 });
 
-router.post("/checkout", function(req, res){
+router.post("/checkout", isLoggedIn, function(req, res){
     if (req.session.cart.totalQty == 0) {
         return res.redirect("/shopping-cart");
     }
@@ -207,14 +207,25 @@ router.post("/checkout", function(req, res){
         description: 'My First Test Charge',
     },
     function(err, charge) {
-        // asynchronously called
+        // Asynchronously called
         if (err) {
             req.flash("error", err.message);
             return res.redirect("/checkout");
         }
-        req.flash("success", "Successfully bought product!");
-        req.session.cart = null;
-        res.redirect("/");
+        // Save the order
+        var order = new Order({
+            user: req.user,
+            cart: cart,
+            address: req.body.checkout["address"],
+            name: req.body.checkout["name"],
+            paymentId: charge.id
+        });
+        order.save(function(err, order){
+            req.flash("success", "Successfully bought product!");
+            req.session.cart = null;
+            res.redirect("/");
+        });
+
     }
     );
 });
