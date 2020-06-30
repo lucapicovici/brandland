@@ -9,7 +9,7 @@ var Cart            = require("../models/cart.js"),
     Laptop_Ram      = require("../models/laptop-ram.js");
 
 router.get("/", function(req, res){
-    res.render("index");
+    res.render("index", {successMsg: req.flash("success")});
 });
 
 router.get("/laptop", function(req, res){
@@ -187,7 +187,36 @@ router.get("/checkout", function(req, res){
         return res.redirect("/shopping-cart");
     }
     var cart = new Cart(req.session.cart);
-    res.render("shop/checkout", {totalPrice: cart.totalPrice});
+    res.render("shop/checkout", {totalPrice: cart.totalPrice, errMsg: req.flash("error")});
+});
+
+router.post("/checkout", function(req, res){
+    if (req.session.cart.totalQty == 0) {
+        return res.redirect("/shopping-cart");
+    }
+    var cart = new Cart(req.session.cart);
+
+    var stripe = require('stripe')('sk_test_51GyhSUBVEY9pRgXUHQ77nJ3EonwBUPmB2UM5nLvDZ0AsKOTGoLYYPXcNddcFSkQYvocpzN7FIKw7pTHHKlPmNW9I00nQwENkkt');
+
+    // `source` is obtained with Stripe.js; see https://stripe.com/docs/payments/accept-a-payment-charges#web-create-token
+    stripe.charges.create(
+    {
+        amount: cart.totalPrice * 100,
+        currency: 'usd',
+        source: req.body.stripeToken,
+        description: 'My First Test Charge',
+    },
+    function(err, charge) {
+        // asynchronously called
+        if (err) {
+            req.flash("error", err.message);
+            return res.redirect("/checkout");
+        }
+        req.flash("success", "Successfully bought product!");
+        req.session.cart = null;
+        res.redirect("/");
+    }
+    );
 });
 
 function isLoggedIn(req, res, next){

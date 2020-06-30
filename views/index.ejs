@@ -2,6 +2,12 @@
 
 <div class="container">
     <h1>Home page</h1>
+
+    <% if (successMsg.length > 0) { %>
+        <div class="alert alert-success" role="alert">
+            <%= successMsg %>
+        </div>
+    <% } %>
 </div>
 
 <%- include("./partials/footer.ejs"); %>
