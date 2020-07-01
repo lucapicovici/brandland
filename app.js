@@ -16,8 +16,9 @@ require("./config/passport.js");
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useUnifiedTopology", true);
-mongoose.connect("mongodb://localhost/shopping-cart");
-seedDB();
+var dbUrl = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+mongoose.connect(dbUrl);
+// seedDB();
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -45,6 +46,6 @@ app.use(function(req, res, next){
 app.use("/user", userRoutes);
 app.use("/", indexRoutes);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log("shopping-cart server is now listening to port 3000.");
 });
