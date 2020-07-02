@@ -1,9 +1,9 @@
 <%- include("../../partials/header.ejs"); %>
 
 <div class="container">
-  <div class="row">
+  <div class="row index-products-list">
     <% laptops.forEach(function(laptop){ %>
-      <div class="col-md-6 col-lg-4">
+      <div class="col-md-6 col-lg-4 index-product">
         <div class="card">
           <a href="/laptop/<%= laptop._id %>">
             <div class="card-img-wrapper">
@@ -14,8 +14,13 @@
             <a href="/laptop/<%= laptop._id %>">
               <h5 class="card-title"><%= laptop.brand + " " + laptop.name %></h5>
             </a>
-            <p class="card-text"><%= laptop.screenSize %></p>
-            <p class="price float-left">$<%= laptop.price %></p>
+            <ul class="card-text">
+              <li>Display: <%= laptop.displaySize %> in</li>
+              <li>CPU: <%= laptop.cpuBrand + " " + laptop.cpuModel %></li>
+              <li>GPU: <%= laptop.gpuBrand + " " + laptop.gpuModel %></li>
+              <li>RAM: <%= laptop.memorySize + "GB " + laptop.memoryType %></li>
+            </ul>
+            <h4 id="price" class="float-left">$<%= laptop.price %></h4>
             <a href="/add-to-cart/laptop/<%= laptop._id %>" class="btn btn-success btn-sm float-right">Add to Shopping Cart</a>
           </div>
         </div>

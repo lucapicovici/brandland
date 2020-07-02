@@ -1,9 +1,9 @@
 <%- include("../../partials/header.ejs"); %>
 
 <div class="container">
-  <div class="row">
+  <div class="row index-products-list">
     <% laptop_backpacks.forEach(function(laptop_backpack){ %>
-      <div class="col-md-6 col-lg-4">
+      <div class="col-md-6 col-lg-4 index-product">
         <div class="card">
           <a href="/laptop-backpack/<%= laptop_backpack._id %>">
             <div class="card-img-wrapper">
@@ -15,7 +15,7 @@
               <h5 class="card-title"><%= laptop_backpack.brand + " " + laptop_backpack.name %></h5>
             </a>
             <p class="card-text"><%= laptop_backpack.dimensions %></p>
-            <p class="price float-left">$<%= laptop_backpack.price %></p>
+            <h4 id="price" class="float-left">$<%= laptop_backpack.price %></h4>
             <a href="/add-to-cart/laptop-backpack/<%= laptop_backpack._id %>" class="btn btn-success btn-sm float-right">Add to Shopping Cart</a>
           </div>
         </div>

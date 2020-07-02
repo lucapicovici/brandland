@@ -1,15 +1,18 @@
 <%- include("../../partials/header.ejs"); %>
 
 <div class="container">
-  <div class="row">
+  <div class="row show-product">
     <div class="col-md-6">
       <div class="show-image-wrapper">
         <img src="<%= laptop.image %>">
       </div>
     </div>
-    <div class="col-md-6 d-flex">
+    <div class="col-md-6 d-flex show-info">
+      <div class="show-price">
+        <h4>Price: $<%= laptop.price %></h4>
+      </div>
       <div class="show-button">
-        <a href="/add-to-cart/laptop/<%= laptop._id %>" class="btn btn-success btn-sm float-right">Add to Shopping Cart</a>
+        <a href="/add-to-cart/laptop/<%= laptop._id %>" class="btn btn-success float-right">Add to Shopping Cart</a>
       </div>
     </div>
   </div>

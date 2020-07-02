@@ -34,10 +34,7 @@ router.use("/", notLoggedIn, function(req, res, next){
 
 // Sign up
 router.get("/register", function(req, res){
-    console.log(req.session);
-    var errMessages = req.flash("error");
-    console.log(errMessages);
-    res.render("user/register", {errMessages: errMessages});
+    res.render("user/register", {errMsg: req.flash("error")});
 });
 
 router.post("/register", passport.authenticate("local.signup", {
@@ -55,10 +52,7 @@ router.post("/register", passport.authenticate("local.signup", {
 
 // Login
 router.get("/login", function(req, res){
-    console.log(req.session);
-    var errMessages = req.flash("error");
-    console.log(errMessages);
-    res.render("user/login", {errMessages: errMessages});
+    res.render("user/login", {errMsg: req.flash("error")});
 });
 
 router.post("/login", passport.authenticate("local.signin", {
