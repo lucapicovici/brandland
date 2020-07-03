@@ -3,8 +3,8 @@
 <div class="container" id="checkout-container">
   <div class="row">
     <div class="col-md-12">
-      <h1>Checkout</h1>
-      <h5>Total price: $37</h5>
+      <h1 id="checkout-header">Checkout</h1>
+      <h5>Total price: $<%= totalPrice %></h5>
       <div class="alert alert-danger <% if (!errMsg) %> hidden" id="charge-error">
         <%= errMsg %>
       </div>
